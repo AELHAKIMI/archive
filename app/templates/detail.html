@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<table id="tablePermission" class="table table-sm table-sorted data-sortable">
+<table id="tableArchive" class="table table-sm table-sorted data-sortable">
     <thead>
         <tr>
             {% for title in titles %}
@@ -18,8 +18,8 @@
             <td>{{archive.num_dossier}}</td>
             <td>{{archive.description}}</td>
 
-            <td> <a href="#"> <i class="fa fa-pencil fa-2x "></i> </a></td>
-            <td> <a href="#"> <i class="fa fa-trash-o fa-2x  text-danger"></i>
+            <td> <a href="{% url 'update-view' archive.pk %}"> <i class="fa fa-pencil fa-2x "></i> </a></td>
+            <td> <a href="{% url 'delete-view' archive.pk %}"> <i class="fa fa-trash-o fa-2x  text-danger"></i>
                 </a></td>
         </tr>
         {% endif %}

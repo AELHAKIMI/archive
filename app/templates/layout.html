@@ -41,18 +41,14 @@
         
         <div class="navbar-collapse collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'index-view' %}">
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Accueil
-                    </a>
-                </li>
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archive</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'create-view' %}">
                             <span aria-hidden="true"> <i class="fa fa-plus"></i></span>&nbsp; Ajouter
                         </a>
-                        <a class="dropdown-item" href="#">-Tous les permissions</a>
+                        <a class="dropdown-item" href="{% url 'index-view' %}">-Tous les permissions</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#"></a>
                     </div>

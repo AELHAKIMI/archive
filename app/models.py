@@ -11,4 +11,4 @@ class archive(models.Model):
     def __str__(self):
         return str(self.index_patient) + ' - '  + self.nom_patient + ' - ' + self.num_dossier
     def get_absolute_url(self):
-        return reverse('archive-detail-view', kwargs={'pk': self.pk})
+        return reverse('detail-view', kwargs={'pk': self.pk})

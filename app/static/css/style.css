@@ -65,3 +65,8 @@ display: inline-block !important
 #id_type_permis li{
     list-style: none;
 }
+#tableArchive td{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
