@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from .models import archive
+from .models import archive , WorkList
 from . import forms
 from django.urls import reverse_lazy
 
@@ -46,5 +46,17 @@ class ArchiveDeleteView(DeleteView):
     model         = archive
     success_url = reverse_lazy('index-view')
 
+
+class WorklistListView(ListView):
+    template_name = 'worklist/index.html'
+    context_object_name = 'all_worklist'
+    def get_queryset(self):
+        return WorkList.objects.all()
+    def get_context_data(self , **kwargs):
+        context = super(WorklistListView, self).get_context_data(**kwargs)
+        context.update({
+            'titles' : titles,
+        })
+        return context
 
     

@@ -12,3 +12,14 @@ class archive(models.Model):
         return str(self.index_patient) + ' - '  + self.nom_patient + ' - ' + self.num_dossier
     def get_absolute_url(self):
         return reverse('detail-view', kwargs={'pk': self.pk})
+
+class WorkList(models.Model):
+    date_worklist   = models.DateField(verbose_name='Date Worklist', auto_now=False)
+    archive         = models.ManyToManyField(archive, verbose_name='Archive')
+    description     = models.TextField(max_length=1000, verbose_name='Description',blank=True)
+
+    def __str__(self):
+        return  str(self.date_worklist) 
+    
+    def get_absolute_url(self):
+        return reverse('worklist-detail-view', kwargs={'pk': self.pk})
