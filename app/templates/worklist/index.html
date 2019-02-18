@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
-{% for archive in all_worklist  %}
+{% for worklist in all_worklist  %}
     <table id="tableArchive" class="table table-sm table-sorted data-sortable">
-    <h1> {{archive.date_worklist}} </h1>
+    <h1> {{worklist.date_worklist}} </h1>
     <thead>
         <tr>
             {% for title in titles %}
@@ -13,10 +13,11 @@
     </thead>
 
     <body>
+    {% for archive in worklist.archive.all %}
         {% if archive %}
             
-            <tr class="text-center">
-                <td>{{archive.archive.index_patient}}</td>
+                <tr class="text-center">
+                <td>{{archive.index_patient}}</td>
                 <td>{{archive.nom_patient}}</td>
                 <td>{{archive.num_dossier}}</td>
                 <td>{{archive.description}}</td>
@@ -25,9 +26,10 @@
                 <td> <a href="{% url 'delete-view' archive.pk %}"> <i class="fa fa-trash-o fa-2x  text-danger"></i>
                     </a></td>
             </tr>
-           
 
         {% endif %}
+    {% endfor %}
+        
     </body>
 
     </table>

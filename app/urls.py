@@ -10,4 +10,5 @@ urlpatterns = [
     ######################  WorkList
 
     url(r'^worklist/index/$', views.WorklistListView.as_view(), name='worklist-index-view'),
+    url(r'^worklist/add/$', views.WorkListCreateView.as_view(), name='worklist-create-view'),
 ]

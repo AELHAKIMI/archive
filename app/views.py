@@ -59,4 +59,9 @@ class WorklistListView(ListView):
         })
         return context
 
+class WorkListCreateView(CreateView):
+    template_name = 'worklist/add.html'
+    model         = WorkList
+    fields = '__all__'
+    model = archive
     

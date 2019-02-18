@@ -13,13 +13,12 @@ class ArchiveForm(ModelForm):
             'description' : forms.Textarea(attrs={'class': 'form-control'}),
         }
 
-class WorkListForm(ModelForm):
-    class Meta:
-        model = WorkList
-        fields = '__all__'
-        widgets ={
-            'index_patient' : forms.TextInput(attrs={'class': 'form-control'}),
-            'nom_patient' :forms.TextInput(attrs={'class': 'form-control'}),
-            'num_dossier' :forms.TextInput(attrs={'class': 'form-control'}),
-            'description' : forms.Textarea(attrs={'class': 'form-control'}),
-        }
+class WorkListForm(forms.Form):
+    index_patient = forms.IntegerField(min_value=1,
+                required = True,
+                label  = 'Index Patient',
+                widget   = forms.TextInput(attrs={'class': 'form-control',}),
+                
+    )
+    
+        
