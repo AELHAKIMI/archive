@@ -15,7 +15,7 @@ class archive(models.Model):
 
 class WorkList(models.Model):
     date_worklist   = models.DateField(verbose_name='Date Worklist', auto_now=False)
-    archive         = models.ManyToManyField(archive, verbose_name='Archive')
+    archive         = models.ManyToManyField(archive, verbose_name='Archive', related_name='archives')
     description     = models.TextField(max_length=1000, verbose_name='Description',blank=True)
 
     def __str__(self):
