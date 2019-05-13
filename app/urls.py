@@ -11,4 +11,5 @@ urlpatterns = [
 
     url(r'^worklist/index/$', views.WorklistListView.as_view(), name='worklist-index-view'),
     url(r'^worklist/add/$', views.WorkListCreateView.as_view(), name='worklist-create-view'),
+    url(r'^worklist/detail/(?P<pk>[0-9]+)/$', views.WorkListDetailView.as_view(), name='worklist-detail-view'),
 ]

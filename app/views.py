@@ -64,4 +64,14 @@ class WorkListCreateView(CreateView):
     model         = WorkList
     fields = '__all__'
     
-    
+
+class WorkListDetailView(DetailView):
+    model = WorkList
+    template_name = 'worklist/detail.html'
+    context_object_name = 'worklist'
+    def get_context_data(self , **kwargs):
+        context = super(WorkListDetailView, self).get_context_data(**kwargs)
+        context.update({
+            'titles' : titles,
+        })
+        return context

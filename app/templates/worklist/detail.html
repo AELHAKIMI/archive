@@ -1,8 +1,7 @@
-{% extends "layout.html" %}
+{% extends "../layout.html" %}
 {% block body %}
-{% for worklist in all_worklist  %}
+<h1> {{worklist.date_worklist}} </h1>
 <table id="tableArchive" class="table table-sm table-sorted data-sortable">
-    <h1> {{worklist.date_worklist}} </h1>
     <thead>
         <tr>
             {% for title in titles %}
@@ -25,11 +24,7 @@
 
         {% endif %}
         {% endfor %}
-
     </body>
 
 </table>
-
-{% endfor%}
-
 {% endblock body %}
