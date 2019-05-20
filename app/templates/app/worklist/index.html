@@ -1,29 +1,35 @@
-{% extends "layout.html" %}
+{% extends "app/layout.html" %}
 {% block body %}
+{% for worklist in all_worklist  %}
 <table id="tableArchive" class="table table-sm table-sorted data-sortable">
+    <h1> {{worklist.date_worklist}} </h1>
     <thead>
         <tr>
             {% for title in titles %}
             <th class="text-center bg-dark " style="color:#c0c8d6;">{{ title }}</th>
             {%endfor%}
-            <th colspan="2" class="text-center bg-light text-gray-dark">Action</th>
+            
         </tr>
     </thead>
 
     <body>
+        {% for archive in worklist.archive.all %}
         {% if archive %}
+
         <tr class="text-center">
             <td>{{archive.index_patient}}</td>
             <td>{{archive.nom_patient}}</td>
             <td>{{archive.num_dossier}}</td>
             <td>{{archive.description}}</td>
-
-            <td> <a href="{% url 'update-view' archive.pk %}"> <i class="fa fa-pencil fa-2x "></i> </a></td>
-            <td> <a href="{% url 'delete-view' archive.pk %}"> <i class="fa fa-trash-o fa-2x  text-danger"></i>
-                </a></td>
         </tr>
+
         {% endif %}
+        {% endfor %}
+
     </body>
 
 </table>
+
+{% endfor%}
+
 {% endblock body %}

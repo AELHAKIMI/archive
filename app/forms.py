@@ -13,34 +13,34 @@ class ArchiveForm(ModelForm):
             'description' : forms.Textarea(attrs={'class': 'form-control'}),
         }
 
-class ArchiveAdminForm(ModelForm):
-    archive = forms.ModelMultipleChoiceField(
-        queryset = archive.objects.all(),
-        required = True,
-        widget = FilteredSelectMultiple(
-            verbose_name = 'Archives', 
-            is_stacked = False,
-        )
-    )
-    class Meta:
-        model = archive
-        fields = '__all__'
-    def __init__(self, *args, **kwargs):
-        super(ArchiveAdminForm, self).__init__(*args, **kwargs)
+# class ArchiveAdminForm(ModelForm):
+#     archive = forms.ModelMultipleChoiceField(
+#         queryset = archive.objects.all(),
+#         required = True,
+#         widget = FilteredSelectMultiple(
+#             verbose_name = 'Archives', 
+#             is_stacked = False,
+#         )
+#     )
+#     class Meta:
+#         model = archive
+#         fields = '__all__'
+#     def __init__(self, *args, **kwargs):
+#         super(ArchiveAdminForm, self).__init__(*args, **kwargs)
 
-        if self.instance and self.instance.pk:
-            self.fields['archive'].initial = self.instance.archive.all()
-    def save(self, commit=True):
-        archive = super(ArchiveAdminForm, self).save(commit=False)
+#         if self.instance and self.instance.pk:
+#             self.fields['archive'].initial = self.instance.archive.all()
+#     def save(self, commit=True):
+#         archive = super(ArchiveAdminForm, self).save(commit=False)
 
-        if commit:
-            archive.save()
+#         if commit:
+#             archive.save()
 
-        if archive.pk:
-            archive.archive = self.cleaned_data['archive']
-            self.save_m2m()
+#         if archive.pk:
+#             archive.archive = self.cleaned_data['archive']
+#             self.save_m2m()
 
-        return archive
+#         return archive
 
 
     

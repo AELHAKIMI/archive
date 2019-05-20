@@ -5,12 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    {% load staticfiles %}  
-    <!--CSS--> 
+    {% load staticfiles %}
+    <!--CSS-->
     <link rel="stylesheet" href=" {% static 'css/bootstrap.css' %} ">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href=" {% static 'css/style.css' %} ">    
+    <link rel="stylesheet" href=" {% static 'css/style.css' %} ">
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
     <!--JS-->
@@ -20,30 +21,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>  
- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+
 
     {% block head %}
-      
+
     {% endblock head %}
-    
+
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
         <a class="navbar-brand " href="{% url 'index-view' %}">Archive</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="navbar-collapse collapse" id="navbarNav">
+            {% if user.is_authenticated %}
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archive</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Archive</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'create-view' %}">
                             <span aria-hidden="true"> <i class="fa fa-plus"></i></span>&nbsp; Ajouter
@@ -53,8 +57,9 @@
                         <a class="dropdown-item" href="#"></a>
                     </div>
                 </li>
-               <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">WorkList</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">WorkList</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'worklist-create-view' %}">
                             <span aria-hidden="true"> <i class="fa fa-plus"></i></span>&nbsp; Ajouter
@@ -67,25 +72,42 @@
             </ul>
             <form class="form-inline my-2 my-lg-0" role="search" method="GET" action="#">
                 <div class=" input-group-append">
-                    <input class="form-control mr-sm-2 border-left-0 border" type="search" name="q" placeholder="Rechercher..." aria-label="Search">
-                    <button class="btn  my-2 my-sm-0  border" type="submit">
+                    <input class="form-control mr-sm-2 border-left-0 border" type="search" name="q"
+                        placeholder="Rechercher..." aria-label="Search">
+                    <button class="btn my-2 my-sm-0 border" type="submit">
                         <i class="fa fa-search text-info"></i>
                     </button>
                 </div>
             </form>
             <ul class="navbar-nav my-2 my-lg-0 glyphicon-align-right">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user }}</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">{{ request.user }}</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Changer Mot de passe</a>
+                        <a class="dropdown-item" href="{% url 'change_password' %}">Changer Mot de passe</a>
                         <a class="dropdown-item" href="#">Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Deconnexion</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Deconnexion</a>
                     </div>
                 </li>
+
+
+
+
             </ul>
+            {% else %}
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link" href=" {% url 'login' %}">Log In</a>
+                      </li>
+                    </ul>
+                  </div>
+            {% endif %}
 
         </div>
+
+
     </nav>
     <div class="container">
         {% block body %}{% endblock %}

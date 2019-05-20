@@ -1,8 +1,7 @@
-{% extends "layout.html" %}
+{% extends "app/layout.html" %}
 {% block body %}
-{% for worklist in all_worklist  %}
+
 <table id="tableArchive" class="table table-sm table-sorted data-sortable">
-    <h1> {{worklist.date_worklist}} </h1>
     <thead>
         <tr>
             {% for title in titles %}
@@ -13,7 +12,7 @@
     </thead>
 
     <body>
-        {% for archive in worklist.archive.all %}
+       
         {% if archive %}
 
         <tr class="text-center">
@@ -24,12 +23,8 @@
         </tr>
 
         {% endif %}
-        {% endfor %}
-
+       
     </body>
 
 </table>
-
-{% endfor%}
-
 {% endblock body %}

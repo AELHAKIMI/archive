@@ -1,5 +1,5 @@
 
-{% extends "layout.html" %}
+{% extends "app/layout.html" %}
 {% block body %}
         <form action="" method="POST" novalidate>
             {% csrf_token %}
@@ -14,7 +14,7 @@
         {% endfor %}
     </table>
     <ul class="list-inline  rounded-top rounded-bottom border bg-light" style="padding: 8px 20px 10px 100px;">
-        <li><input type="submit" class="btn ui-button list-group-item" value="Enregistrer"></li>
+        <li><input type="submit" class="btn ui-button list-group-item" value="Login"></li>
     </ul>
        </form>
 

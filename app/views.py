@@ -3,12 +3,15 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from .models import archive , WorkList
 from . import forms
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
 titles = ('Index Patient', 'Nom Patient', 'Numero Dossier', 'Description',)
-class ArchiveListView(ListView):
-    template_name = 'index.html'
+class ArchiveListView(LoginRequiredMixin, ListView):
+    login_url ='/login/'
+    
+    template_name = 'app/index.html'
     context_object_name = 'all_archives'
     def get_queryset(self):
         return archive.objects.all()
@@ -19,16 +22,17 @@ class ArchiveListView(ListView):
         })
         return context
 
-class ArchiveCreateView(CreateView):
-    template_name = 'add.html'
+class ArchiveCreateView(LoginRequiredMixin, CreateView):
+    login_url ='/login/'
+    template_name = 'app/add.html'
     model         = archive
     form_class = forms.ArchiveForm
 
 
-class ArchiveDetailView(DetailView):
-    
+class ArchiveDetailView(LoginRequiredMixin, DetailView):
+    login_url ='/login/'
     model = archive
-    template_name = 'detail.html'
+    template_name = 'app/detail.html'
     context_object_name = 'archive'
     def get_context_data(self , **kwargs):
         context = super(ArchiveDetailView, self).get_context_data(**kwargs)
@@ -37,18 +41,20 @@ class ArchiveDetailView(DetailView):
         })
         return context
 
-class ArchiveUpdateView(UpdateView):
+class ArchiveUpdateView(LoginRequiredMixin, UpdateView):
+    login_url ='/login/'
     model = archive
-    template_name = 'add.html'
+    template_name = 'app/add.html'
     form_class = forms.ArchiveForm
-class ArchiveDeleteView(DeleteView):
-    template_name = 'confirm_delete.html'
+class ArchiveDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'app/confirm_delete.html'
     model         = archive
     success_url = reverse_lazy('index-view')
 
 
-class WorklistListView(ListView):
-    template_name = 'worklist/index.html'
+class WorklistListView(LoginRequiredMixin, ListView):
+    login_url ='/login/'
+    template_name = 'app/worklist/index.html'
     context_object_name = 'all_worklist'
     def get_queryset(self):
         return WorkList.objects.all()
@@ -59,15 +65,17 @@ class WorklistListView(ListView):
         })
         return context
 
-class WorkListCreateView(CreateView):
-    template_name = 'worklist/add.html'
+class WorkListCreateView(LoginRequiredMixin, CreateView):
+    login_url ='/login/'
+    template_name = 'app/worklist/add.html'
     model         = WorkList
     fields = '__all__'
     
 
-class WorkListDetailView(DetailView):
+class WorkListDetailView(LoginRequiredMixin, DetailView):
+    login_url ='/login/'
     model = WorkList
-    template_name = 'worklist/detail.html'
+    template_name = 'app/worklist/detail.html'
     context_object_name = 'worklist'
     def get_context_data(self , **kwargs):
         context = super(WorkListDetailView, self).get_context_data(**kwargs)
